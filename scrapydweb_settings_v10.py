@@ -22,8 +22,8 @@ SCRAPYDWEB_PORT = 5000
 # The default is False, set it to True to enable basic auth for the web UI.
 ENABLE_AUTH = True
 # In order to enable basic auth, both USERNAME and PASSWORD should be non-empty strings.
-USERNAME = 'admin'
-PASSWORD = 'admin'
+USERNAME = os.getenv("USERNAME", 'admin')
+PASSWORD = os.getenv("PASSWORD", 'admin')
 
 
 # Make sure that [Scrapyd](https://github.com/scrapy/scrapyd) has been installed
@@ -45,11 +45,7 @@ PASSWORD = 'admin'
 #   - or if ScrapydWeb fails to parse the string format passed in,
 #   - it's recommended to pass in a tuple of 5 elements.
 #   - e.g. ('', '', '127.0.0.1', '6800', '') or ('username', 'password', 'localhost', '6801', 'group')
-SCRAPYD_SERVERS = [
-    '127.0.0.1:6800',
-    # 'username:password@localhost:6801#group',
-    # ('username', 'password', 'localhost', '6801', 'group'),
-]
+SCRAPYD_SERVERS = os.getenv("SCRAPYD_SERVERS").split(',')
 
 
 # It's recommended to update the three options below
