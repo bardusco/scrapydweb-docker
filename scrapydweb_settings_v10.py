@@ -70,7 +70,7 @@ LOCAL_SCRAPYD_LOGS_DIR = ''
 # Note that you can run the LogParser service separately via command 'logparser' as you like.
 # Run 'logparser -h' to find out the config file of LogParser for more advanced settings.
 # Visit https://github.com/my8100/logparser for more info.
-ENABLE_LOGPARSER = True
+ENABLE_LOGPARSER = False
 ############################## QUICK SETUP end ################################
 ############################## 快速设置 结束 ###################################
 
