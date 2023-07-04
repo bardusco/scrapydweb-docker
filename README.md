@@ -7,6 +7,7 @@ docker run --name scrapydweb -e USERNAME=<username> \
     -e SCRAPYD_SERVERS=<servers> \
     -v /data/scrapydweb_data:/usr/local/lib/python3.11/site-packages/scrapydweb/data \
     -v /etc/timezone:/etc/timezone \
+    -p 5000:5000
     -d scrapydweb:latest
 ```
 
