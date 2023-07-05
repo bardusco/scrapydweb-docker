@@ -1,4 +1,4 @@
-# README - Scrapydweb Dockerfile Project
+# README - Scrapy Platform Project
 
 This repository contains the Dockerfile and docker-compose for setting up and deploying Scrapy Platform
 
