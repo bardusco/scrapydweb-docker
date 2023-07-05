@@ -14,3 +14,8 @@ docker run --name scrapydweb -e USERNAME=<username> \
 - USERNAME: basic auth username, default: admin
 - PASSWORD: basic auth password, default: admin
 - SCRAPYD_SERVERS: scrapyd servers
+
+❯ cat .env
+SCRAPYD_SERVERS=172.17.0.1:6800
+USERNAME=my_name
+PASSWORD=my_very_secure_password

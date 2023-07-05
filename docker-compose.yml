@@ -1,0 +1,44 @@
+version: "3.8"
+
+services:
+
+  scrapydweb:
+    image: bardusco/scrapy-platform
+    command: scrapydweb
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./data:/var/lib/scrapyd
+      - ./workspace:/app
+    environment:
+      - PASSWORD
+      - USERNAME
+      - SCRAPYD_SERVERS
+    restart: unless-stopped
+
+  scrapyd:
+    image: bardusco/scrapy-platform
+    command: scrapyd
+    ports:
+      - "6800:6800"
+    volumes:
+      - ./workspace:/app
+    restart: unless-stopped
+
+  scrapy:
+    image: bardusco/scrapy-platform
+    command: bash
+    volumes:
+      - .:/code
+    working_dir: /code
+    restart: unless-stopped
+
+  scrapyrt:
+    image: bardusco/scrapy-platform
+    command: scrapyrt -i 0.0.0.0 -p 9080
+    ports:
+      - "9080:9080"
+    volumes:
+      - .:/code
+    working_dir: /code
+    restart: unless-stopped
