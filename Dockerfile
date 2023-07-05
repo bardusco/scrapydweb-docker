@@ -1,6 +1,11 @@
 FROM vimagick/scrapyd
-ADD ./workspace/ /app
+COPY workspace/ /app
 WORKDIR /app
+RUN mkdir -p /var/log/scrapyd
+
+RUN pip3 install scrapy-user-agents scrapy_playwright
+RUN playwright install
+RUN playwright install-deps
 
 RUN apt-get update && \ 
   apt-get install -y git && \
