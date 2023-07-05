@@ -64,7 +64,7 @@ LOCAL_SCRAPYD_SERVER = ''
 # python -c "from os.path import abspath, isdir; from scrapyd.config import Config; path = abspath(Config().get('logs_dir')); print(path); print(isdir(path))"
 # Check out https://scrapyd.readthedocs.io/en/stable/config.html#logs-dir for more info.
 # e.g. 'C:/Users/username/logs' or '/home/username/logs'
-LOCAL_SCRAPYD_LOGS_DIR = 'scrapyd/logs'
+LOCAL_SCRAPYD_LOGS_DIR = '/app/scrapyd/logs'
 
 # The default is False, set it to True to automatically run LogParser as a subprocess at startup.
 # Note that you can run the LogParser service separately via command 'logparser' as you like.
@@ -275,7 +275,7 @@ POLL_REQUEST_INTERVAL = 10
 # The default is False, set it to True to enable alert via Slack, Telegram, or Email.
 # You have to set up your accounts in the "Send text" section above first.
 ENABLE_SLACK_ALERT = False
-ENABLE_TELEGRAM_ALERT = False
+ENABLE_TELEGRAM_ALERT = True
 ENABLE_EMAIL_ALERT = False
 
 ########## alert working time ##########
@@ -350,7 +350,7 @@ VERBOSE = False
 
 # The default is '', which means saving all program data in the Python directory.
 # e.g. 'C:/Users/username/scrapydweb_data' or '/home/username/scrapydweb_data'
-DATA_PATH = os.environ.get('DATA_PATH', '')
+DATA_PATH = os.environ.get('DATA_PATH', '/app/scrapydweb')
 
 # The default is '', which means saving data of Jobs and Timer Tasks in DATA_PATH using SQLite.
 # The data could be also saved in MySQL or PostgreSQL backend in order to improve concurrency.

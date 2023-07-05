@@ -8,12 +8,14 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - ./data:/var/lib/scrapyd
-      - ./workspace:/app
+      - scrapyd-data:/app/scrapyd
+      - scrapydweb-data:/app/scrapydweb
     environment:
       - PASSWORD
       - USERNAME
       - SCRAPYD_SERVERS
+      - TELEGRAM_TOKEN
+      - TELEGRAM_CHAT_ID
     restart: unless-stopped
 
   scrapyd:
@@ -22,23 +24,22 @@ services:
     ports:
       - "6800:6800"
     volumes:
-      - ./workspace:/app
+      - scrapyd-data:/app/scrapyd
+    environment:
+      - SPLASH_URL
+      - WEBHOOK_URL
+      - SCRAPYDWEB_URL
+      - USERNAME
+      - PASSWORD
+      - TELEGRAM_CHAT_ID
     restart: unless-stopped
 
-  scrapy:
-    image: bardusco/scrapy-platform
-    command: bash
-    volumes:
-      - .:/code
-    working_dir: /code
-    restart: unless-stopped
-
-  scrapyrt:
-    image: bardusco/scrapy-platform
-    command: scrapyrt -i 0.0.0.0 -p 9080
+  splash:
+    image: whalebothelmsman/splash
     ports:
-      - "9080:9080"
-    volumes:
-      - .:/code
-    working_dir: /code
+      - "8050:8050"
     restart: unless-stopped
+
+volumes:
+  scrapyd-data:
+  scrapydweb-data:
