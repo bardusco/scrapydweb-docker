@@ -14,12 +14,15 @@ services:
       - PASSWORD
       - USERNAME
       - SCRAPYD_SERVERS
+      - SCRAPYD_USERNAME
+      - SCRAPYD_PASSWORD
       - TELEGRAM_TOKEN
       - TELEGRAM_CHAT_ID
     restart: unless-stopped
 
   scrapyd:
     image: bardusco/scrapy-platform
+    entrypoint: ["/app/scrapyd-config-setup.sh"]
     command: scrapyd
     ports:
       - "6800:6800"
@@ -29,8 +32,8 @@ services:
       - SPLASH_URL
       - WEBHOOK_URL
       - SCRAPYDWEB_URL
-      - USERNAME
-      - PASSWORD
+      - SCRAPYD_USERNAME
+      - SCRAPYD_PASSWORD
       - TELEGRAM_CHAT_ID
     restart: unless-stopped
 
@@ -39,6 +42,11 @@ services:
     ports:
       - "8050:8050"
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '3.0'
+          memory: 2048M
 
 volumes:
   scrapyd-data:

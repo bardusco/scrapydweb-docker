@@ -45,8 +45,13 @@ PASSWORD = os.getenv("PASSWORD", 'admin')
 #   - or if ScrapydWeb fails to parse the string format passed in,
 #   - it's recommended to pass in a tuple of 5 elements.
 #   - e.g. ('', '', '127.0.0.1', '6800', '') or ('username', 'password', 'localhost', '6801', 'group')
-SCRAPYD_SERVERS = os.getenv("SCRAPYD_SERVERS").split(',')
-
+scrapyd_servers = os.getenv("SCRAPYD_SERVERS").split(',')
+scrapyd_username = os.getenv('SCRAPYD_USERNAME')
+scrapyd_password = os.getenv('SCRAPYD_PASSWORD')
+SCRAPYD_SERVERS = []
+for server in scrapyd_servers:
+    host, port = server.split(':')
+    SCRAPYD_SERVERS.append((scrapyd_username, scrapyd_password, host, port, 'group'))
 
 # It's recommended to update the three options below
 # if both ScrapydWeb and one of your Scrapyd servers run on the same machine.
