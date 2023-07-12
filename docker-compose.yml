@@ -45,9 +45,18 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '3.0'
-          memory: 2048M
+          cpus: '1.0'
+          memory: 1024M
+
+  gerapy:
+    image: germey/gerapy
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    volumes:
+      - gerapy-data:/app/gerapy
 
 volumes:
   scrapyd-data:
   scrapydweb-data:
+  gerapy-data:
