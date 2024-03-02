@@ -31,70 +31,28 @@ services:
     volumes:
       - scrapyd-data:/app/scrapyd
     environment:
-      - SPLASH_URL
-      - WEBHOOK_URL
-      - SCRAPYDWEB_URL
-      - SCRAPYD_USERNAME
+      - PASSWORD
+      - PROXY_HOST
+      - PROXY_PASS
+      - PROXY_USER
+      - SCRAPYD_PASS_DEV
+      - SCRAPYD_PASS_PROD
       - SCRAPYD_PASSWORD
+      - SCRAPYD_PROJECT_DEV
+      - SCRAPYD_PROJECT_PROD
+      - SCRAPYD_SERVERS
+      - SCRAPYD_URL_DEV
+      - SCRAPYD_URL_PROD
+      - SCRAPYD_USER_DEV
+      - SCRAPYD_USERNAME
+      - SCRAPYD_USER_PROD
+      - SCRAPYDWEB_URL
+      - SPLASH_URL
       - TELEGRAM_CHAT_ID
+      - USERNAME
+      - WEBHOOK_URL
     restart: unless-stopped
-
-  splash:
-    image: whalebothelmsman/splash
-    container_name: splash
-    ports:
-      - "8050:8050"
-    restart: unless-stopped
-    deploy:
-      resources:
-        limits:
-          cpus: '1.0'
-          memory: 1024M
-
-  gerapy:
-    image: bardusco/gerapy
-    container_name: gerapy
-    ports:
-      - "8000:8000"
-    restart: unless-stopped
-    volumes:
-      - gerapy-data:/home/gerapy
-
-  crawlab:
-    image: crawlabteam/crawlab
-    container_name: crawlab_master
-    restart: always
-    environment:
-      CRAWLAB_NODE_MASTER: "Y"  # Y: master node
-      CRAWLAB_MONGO_HOST: # mongo host address. In the docker compose network, directly refer to the service name
-      CRAWLAB_MONGO_PORT: # mongo port 
-      CRAWLAB_MONGO_DB: # mongo database 
-      CRAWLAB_MONGO_USERNAME: # mongo username
-      CRAWLAB_MONGO_PASSWORD: # mongo password 
-      CRAWLAB_MONGO_AUTHSOURCE: # mongo auth source 
-    volumes:
-      - crawlab-master-data:/data"  # persistent crawlab data
-    ports:
-      - "8080:8080"  # exposed api port
-    depends_on:
-      - mongo
-
-  mongo:
-    image: mongo:4.2
-    restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: # mongo username
-      MONGO_INITDB_ROOT_PASSWORD: # mongo password
-    volumes:
-      - crawlab-master-metadata:/root/.crawlab"  # persistent crawlab metadata
-      - crawlab-master-mongo-db:/data/db"  # persistent mongo data
-    ports:
-      - "27017:27017"  # expose mongo port to host machine
 
 volumes:
   scrapyd-data:
   scrapydweb-data:
-  gerapy-data:
-  crawlab-master-data:
-  crawlab-master-metadata:
-  crawlab-master-mongo-db:
