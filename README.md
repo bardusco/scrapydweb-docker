@@ -40,6 +40,11 @@ USERNAME=my_name
 PASSWORD=my_very_secure_password
 ```
 
+## Gerapy
+
+Projects folder: `/var/lib/docker/volumes/scrapydweb-docker_gerapy-data/_data/projects`
+Put your scrapy projects here
+
 ## About the Project
 
 Scrapy is an open-source and collaborative framework for extracting the data you need from websites in a fast, simple, yet extensible way.
